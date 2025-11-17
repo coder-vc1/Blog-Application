@@ -1,369 +1,325 @@
-```markdown
-# 📝 Mini Blogging Platform
 
-A modern full-stack blogging platform featuring user authentication, complete CRUD operations, and an intelligent AI-powered support assistant. Built with **Java Spring Boot** backend and **Next.js** frontend.
+---
 
-![Mini Blog Platform](https://img.shields.io/badge/Status-Production%20Ready-success)
-![Java](https://img.shields.io/badge/Java-17-orange)
-![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.2.0-brightgreen)
-![Next.js](https://img.shields.io/badge/Next.js-14.0.4-black)
-![MySQL](https://img.shields.io/badge/MySQL-8.0-blue)
+# 📝 Mini Blog Application
+
+A modern **full-stack blogging platform** with secure authentication, full CRUD blog management, and an intelligent **AI-powered support assistant**.
+Built using **Java Spring Boot** (backend) and **Next.js 14** (frontend), optimized for performance, security, and clean architecture.
+
+---
+
+## 🚀 Highlights
+
+* 🔐 **Secure Authentication** (JWT + BCrypt + role-based access)
+* 📝 **Complete Blog CRUD** with Markdown & real-time preview
+* 🤖 **AI Assistant** for FAQs and platform guidance
+* 🎨 **Modern UI/UX** with Tailwind and responsive design
+* ⚡ **Fast, Production-Ready Architecture**
+* 📚 **Fully documented APIs via Swagger**
+
+---
+
+## 📌 Table of Contents
+
+* Features
+* Tech Stack
+* Architecture
+* Project Structure
+* Setup Guide (Backend + Frontend)
+* API Documentation
+* Security Features
+* Usage Guide
+* Testing Guide
+* Troubleshooting
+* Performance Optimizations
+* Deployment
+* Contributing
+* License
+* Author
+
+---
 
 ## ✨ Features
 
-### 🔐 Authentication & Security
-- Secure user registration with email validation
-- JWT-based authentication with BCrypt password hashing
-- Persistent sessions with automatic token refresh
-- Protected routes and authorization checks
+### 🔐 Authentication
 
-### 📝 Blog Management
-- **Create** - Compose and publish blogs with Markdown support
-- **Read** - Browse and search all published content
-- **Update** - Edit your own blogs with real-time preview
-- **Delete** - Remove blogs with confirmation prompts
-- Author-based permissions for edit/delete operations
+* Email registration with validation
+* Secure login using JWT
+* Auto-refresh logic for smooth sessions
+* Protected routes & authorization rules
+
+### 📝 Blog Management (CRUD)
+
+* Rich Markdown editor
+* Create, read, update, and delete blogs
+* Author-only permissions for edit/delete
+* Responsive blog cards & detail view
+* Search-enabled blog listing
 
 ### 🤖 AI Support Assistant
-- Intelligent Q&A system powered by knowledge base
-- Context-aware keyword matching algorithm
-- Instant responses to common platform queries
-- Comprehensive FAQ section
 
-### 🎨 Modern UI/UX
-- Sleek dark theme with gradient accents
-- Animated cards with glowing borders
-- Fully responsive mobile-first design
-- Smooth transitions and micro-interactions
-- Toast notifications and loading states
+* Knowledge-base powered Q&A
+* Detects keywords & context
+* Helps users navigate platform features
+
+### 🎨 UI/UX
+
+* Elegant dark theme
+* Fluid transitions & animations
+* Mobile-first responsive layout
+* Global toasts, loaders, and empty states
+
+---
 
 ## 🛠️ Tech Stack
 
 ### Backend
-- **Java 17** - Core language
-- **Spring Boot 3.2.0** - Application framework
-- **Spring Security** - Authentication & authorization
-- **Spring Data JPA** - ORM and database operations
-- **MySQL 8.0** - Relational database
-- **JWT** - Stateless authentication tokens
-- **Lombok** - Code generation and boilerplate reduction
-- **ModelMapper** - Object mapping
-- **SpringDoc OpenAPI** - Interactive API documentation
-- **Maven** - Build and dependency management
+
+* Java 17
+* Spring Boot 3 (Web, Security, JPA)
+* MySQL 8
+* ModelMapper, Lombok
+* JWT Authentication
+* SpringDoc (OpenAPI/Swagger)
 
 ### Frontend
-- **Next.js 14** - React framework with App Router
-- **React 18** - Component-based UI library
-- **TypeScript** - Type-safe JavaScript
-- **Zustand** - Lightweight state management
-- **Tailwind CSS** - Utility-first styling
-- **React Hook Form** - Form handling and validation
-- **Axios** - Promise-based HTTP client
-- **React Hot Toast** - Beautiful notifications
-- **React Markdown** - Markdown rendering
-- **date-fns** - Date manipulation
+
+* Next.js 14 (App Router)
+* React 18 + TypeScript
+* Tailwind CSS
+* Zustand (global state)
+* Axios
+* React Markdown
+* date-fns
+
+---
+
+## 🧱 Architecture Overview
+
+```
+Frontend (Next.js) ───► REST API (Spring Boot) ───► MySQL Database
+         ▲                         │
+         │                         ▼
+         └────────── AI Assistant + Security Layer
+```
+
+* **Frontend** handles UI, routing, and state
+* **Backend** exposes REST APIs with authentication
+* **MySQL** stores users & blogs
+* **AI module** processes knowledge-based queries
+
+---
 
 ## 📁 Project Structure
 
 ```
 mini-blog-platform/
-├── backend/                    # Spring Boot application
-│   ├── src/main/java/com/blogging/
-│   │   ├── config/            # Application configuration
-│   │   ├── controller/        # REST API endpoints
-│   │   ├── dto/              # Data Transfer Objects
-│   │   ├── entity/           # JPA entities
-│   │   ├── exception/        # Custom exception handling
-│   │   ├── repository/       # Data access layer
-│   │   ├── security/         # Security configuration
-│   │   ├── service/          # Business logic
-│   │   └── util/             # Helper utilities
-│   ├── src/main/resources/
-│   │   └── application.properties
-│   └── pom.xml
-│
-└── frontend/                   # Next.js application
-    ├── app/                   # App router pages
-    │   ├── auth/             # Login/Signup pages
-    │   ├── blogs/            # Blog CRUD pages
-    │   ├── support/          # AI assistant page
-    │   ├── layout.tsx        # Root layout
-    │   ├── page.tsx          # Home page
-    │   └── globals.css       # Global styles
-    ├── components/            # Reusable React components
-    ├── hooks/                # Custom React hooks
-    ├── store/                # Zustand state stores
-    ├── types/                # TypeScript definitions
-    └── package.json          # Dependencies
+├── backend/
+│   ├── config/
+│   ├── controller/
+│   ├── dto/
+│   ├── entity/
+│   ├── exception/
+│   ├── repository/
+│   ├── security/
+│   ├── service/
+│   └── util/
+└── frontend/
+    ├── app/
+    ├── components/
+    ├── hooks/
+    ├── store/
+    ├── types/
+    └── public/
 ```
 
-## 🚀 Getting Started
+---
 
-### Prerequisites
+# 🚀 Getting Started
 
-Ensure you have the following installed:
-- **Java 17+**
-- **Maven 3.6+**
-- **MySQL 8.0+**
-- **Node.js 18+**
-- **npm** or **yarn**
+## Backend Setup
 
-### Backend Setup
-
-1. **Clone the repository**
-   ```bash
-   git clone <repository-url>
-   cd mini-blog-platform/backend
-   ```
-
-2. **Configure MySQL**
-   
-   Create and update `src/main/resources/application.properties`:
-   ```properties
-   spring.datasource.url=jdbc:mysql://localhost:3306/mini_blog_db
-   spring.datasource.username=YOUR_USERNAME
-   spring.datasource.password=YOUR_PASSWORD
-   
-   # JPA Configuration
-   spring.jpa.hibernate.ddl-auto=update
-   spring.jpa.show-sql=true
-   
-   # JWT Configuration
-   jwt.secret=your-secret-key-here
-   jwt.expiration=86400000
-   ```
-
-3. **Create database**
-   ```sql
-   CREATE DATABASE mini_blog_db;
-   ```
-
-4. **Build and run**
-   ```bash
-   mvn clean install
-   mvn spring-boot:run
-   ```
-
-5. **Verify backend is running**
-   - API: `http://localhost:8080`
-   - Swagger UI: `http://localhost:8080/swagger-ui.html`
-
-### Frontend Setup
-
-1. **Navigate to frontend directory**
-   ```bash
-   cd ../frontend
-   ```
-
-2. **Install dependencies**
-   ```bash
-   npm install
-   # or
-   yarn install
-   ```
-
-3. **Configure environment**
-   
-   Create `.env.local` file:
-   ```bash
-   NEXT_PUBLIC_API_URL=http://localhost:8080/api
-   ```
-
-4. **Start development server**
-   ```bash
-   npm run dev
-   # or
-   yarn dev
-   ```
-
-5. **Open application**
-   
-   Navigate to `http://localhost:3000`
-
-## 📚 API Endpoints
-
-### Authentication
-| Method | Endpoint | Description | Auth Required |
-|--------|----------|-------------|---------------|
-| POST | `/api/auth/signup` | Register new user | No |
-| POST | `/api/auth/login` | Authenticate user | No |
-| GET | `/api/auth/me` | Get current user profile | Yes |
-
-### Blogs
-| Method | Endpoint | Description | Auth Required |
-|--------|----------|-------------|---------------|
-| GET | `/api/blogs` | Retrieve all blogs | No |
-| POST | `/api/blogs` | Create new blog | Yes |
-| GET | `/api/blogs/{id}` | Get specific blog | No |
-| PUT | `/api/blogs/{id}` | Update blog (author only) | Yes |
-| DELETE | `/api/blogs/{id}` | Delete blog (author only) | Yes |
-
-### AI Support
-| Method | Endpoint | Description | Auth Required |
-|--------|----------|-------------|---------------|
-| POST | `/api/ai/query` | Query AI assistant | No |
-| GET | `/api/ai/info` | Get AI capabilities | No |
-
-## 🔒 Security Features
-
-- ✅ **Password Security** - BCrypt hashing with salt rounds
-- ✅ **Token Authentication** - Stateless JWT with expiration
-- ✅ **CORS Protection** - Configured for frontend origin
-- ✅ **SQL Injection Prevention** - Parameterized queries via JPA
-- ✅ **XSS Protection** - React's built-in sanitization
-- ✅ **Input Validation** - Bean Validation + client-side validation
-- ✅ **Authorization** - Role-based access control
-- ✅ **Error Handling** - Global exception handler with sanitized messages
-
-## 🎯 Usage Guide
-
-### Creating Your First Blog
-
-1. **Sign Up**
-   - Navigate to `/auth/signup`
-   - Enter email, password (min 6 chars), and optional name
-   - Account created and auto-logged in
-
-2. **Write a Blog**
-   - Click "Create Blog" button
-   - Add title (max 200 characters)
-   - Write content with Markdown formatting
-   - Preview in real-time
-   - Click "Publish"
-
-3. **Manage Your Blogs**
-   - View all blogs on homepage
-   - Click any blog to read full content
-   - Edit/Delete buttons appear only on your blogs
-   - Confirm before deletion
-
-4. **Get Help**
-   - Navigate to `/support`
-   - Ask questions like:
-     - "How do I create a blog?"
-     - "Can I edit other users' blogs?"
-     - "What Markdown features are supported?"
-
-## 🧪 Testing
-
-### Manual Testing Flow
-
-1. **User Registration & Authentication**
-   ```
-   Open http://localhost:3000
-   → Sign Up with test credentials
-   → Verify auto-login
-   → Check JWT token in localStorage
-   ```
-
-2. **Blog Operations**
-   ```
-   → Create blog with Markdown
-   → View in blog list
-   → Edit your blog
-   → Try editing another user's blog (should fail)
-   → Delete your blog
-   ```
-
-3. **AI Assistant**
-   ```
-   → Navigate to /support
-   → Ask various questions
-   → Verify relevant responses
-   ```
-
-### API Testing with Swagger
-
-1. Open `http://localhost:8080/swagger-ui.html`
-2. Test signup endpoint: `/api/auth/signup`
-3. Copy JWT token from response
-4. Click "Authorize" button
-5. Enter: `Bearer <your-token>`
-6. Test protected endpoints
-
-## 🐛 Troubleshooting
-
-### Common Backend Issues
-
-**Port 8080 already in use**
 ```bash
-# Find process
-lsof -i :8080
-# Kill process
-kill -9 <PID>
+git clone <repository-url>
+cd mini-blog-platform/backend
 ```
 
-**Database connection failed**
+### Configure MySQL
+
+`src/main/resources/application.properties`:
+
+```properties
+spring.datasource.url=jdbc:mysql://localhost:3306/mini_blog_db
+spring.datasource.username=YOUR_USERNAME
+spring.datasource.password=YOUR_PASSWORD
+spring.jpa.hibernate.ddl-auto=update
+
+jwt.secret=YOUR_SECRET
+jwt.expiration=86400000
+```
+
+### Run Backend
+
 ```bash
-# Verify MySQL is running
-systemctl status mysql
-# Or on macOS
-brew services list
-
-# Test connection
-mysql -u root -p
+mvn clean install
+mvn spring-boot:run
 ```
 
-**JWT token errors**
-- Ensure `jwt.secret` is set in `application.properties`
-- Check token expiration time
-- Verify token format in Authorization header
+### Access
 
-### Common Frontend Issues
+* API Base: `http://localhost:8080`
+* Swagger: `http://localhost:8080/swagger-ui.html`
 
-**API connection errors**
+---
+
+## Frontend Setup
+
 ```bash
-# Verify .env.local
-cat .env.local
-
-# Should output:
-# NEXT_PUBLIC_API_URL=http://localhost:8080/api
-```
-
-**Authentication not persisting**
-```javascript
-// Clear localStorage in browser console
-localStorage.clear()
-// Refresh page and login again
-```
-
-**Build errors**
-```bash
-# Clear cache and reinstall
-rm -rf node_modules .next
+cd ../frontend
 npm install
+```
+
+Create `.env.local`:
+
+```
+NEXT_PUBLIC_API_URL=http://localhost:8080/api
+```
+
+Run:
+
+```bash
 npm run dev
 ```
 
-## 📈 Performance Optimizations
+App is available at:
+👉 `http://localhost:3000`
 
-- **Database**: HikariCP connection pooling for efficient DB access
-- **Queries**: Eager fetching with JOIN FETCH to prevent N+1 problems
-- **Transactions**: `@Transactional` for atomic operations
-- **Frontend**: Next.js automatic code splitting
-- **Caching**: Static page generation where applicable
-- **Bundle**: Tree shaking and minification in production
+---
 
-## 🚀 Deployment
+# 📚 API Endpoints
 
-### Backend Deployment Options
+### Authentication
 
-**Railway / Render** (Recommended)
+| Method | Endpoint           | Description       | Auth |
+| ------ | ------------------ | ----------------- | ---- |
+| POST   | `/api/auth/signup` | Register user     | ❌    |
+| POST   | `/api/auth/login`  | Login & get token | ❌    |
+| GET    | `/api/auth/me`     | Current user      | ✔️   |
+
+### Blog APIs
+
+| Method | Endpoint          | Description          | Auth |
+| ------ | ----------------- | -------------------- | ---- |
+| GET    | `/api/blogs`      | List all blogs       | ❌    |
+| POST   | `/api/blogs`      | Create blog          | ✔️   |
+| GET    | `/api/blogs/{id}` | Get a blog           | ❌    |
+| PUT    | `/api/blogs/{id}` | Update (author only) | ✔️   |
+| DELETE | `/api/blogs/{id}` | Delete (author only) | ✔️   |
+
+### AI Assistant
+
+| Method | Endpoint        | Description    | Auth |
+| ------ | --------------- | -------------- | ---- |
+| POST   | `/api/ai/query` | Ask a question | ❌    |
+
+---
+
+# 🔒 Security Features
+
+* BCrypt password hashing
+* Stateless JWT auth
+* CSRF-safe (token-based architecture)
+* CORS configured for frontend
+* SQL Injection prevention via JPA
+* Unified exception handling
+* Role-based access control (future-proof)
+
+---
+
+# 🧪 Testing Guide
+
+### Authentication Tests
+
+* Sign up → auto-login
+* Verify JWT stored correctly
+* Hit `/auth/me` with token
+
+### Blog Tests
+
+* Create → Read → Update → Delete
+* Attempt editing someone else’s blog (should fail)
+
+### AI Assistant Tests
+
+* Ask predefined queries
+* Validate contextual responses
+
+---
+
+# 🐛 Troubleshooting
+
+### Backend Issues
+
+**Port 8080 in use?**
+
 ```bash
-# Connect GitHub repo
-# Set environment variables
-# Deploy automatically
+lsof -i :8080
+kill -9 <PID>
 ```
 
-**AWS EC2**
+**MySQL connection errors?**
+
 ```bash
-# Package application
-mvn clean package
-# Upload JAR to EC2
-# Run with: java -jar app.jar
+mysql -u root -p
 ```
 
-**Docker**
+**JWT: “Expired/Invalid token”**
+
+* Check `jwt.secret`
+* Adjust expiry in milliseconds
+
+---
+
+### Frontend Issues
+
+**API errors**
+
+```bash
+cat .env.local
+```
+
+**CORS errors**
+
+* Check backend CORS config
+* Ensure correct origin
+
+**Frontend not rebuilding**
+
+```bash
+rm -rf .next node_modules
+npm install
+```
+
+---
+
+# ⚙️ Performance Optimizations
+
+* HikariCP pooling
+* JPA optimized fetch strategies
+* Next.js code splitting
+* Markdown rendering optimized
+* API caching (future enhancement)
+
+---
+
+# 🚀 Deployment Guide
+
+### Backend Options
+
+* **Railway / Render** (easy CI/CD)
+* **AWS EC2** (manual deploy)
+* **Docker:**
+
 ```dockerfile
 FROM openjdk:17-slim
 COPY target/*.jar app.jar
@@ -372,87 +328,41 @@ ENTRYPOINT ["java","-jar","/app.jar"]
 
 ### Frontend Deployment
 
-**Vercel** (Recommended for Next.js)
-```bash
-# Install Vercel CLI
-npm i -g vercel
-# Deploy
+**Vercel (Recommended)**
+
+```
 vercel --prod
 ```
 
-**Environment Variables**
-```
-NEXT_PUBLIC_API_URL=https://your-backend-url.com/api
-```
+---
 
-### Database Hosting
+# 🤝 Contributing
 
-- **PlanetScale** - Serverless MySQL with generous free tier
-- **AWS RDS** - Managed MySQL service
-- **Railway** - Includes database with backend hosting
+1. Fork the repo
+2. Create a feature branch
+3. Commit changes
+4. Open PR
 
-## 🤝 Contributing
+---
 
-Contributions are welcome! Please follow these steps:
+# 📝 License
 
-1. Fork the repository
-2. Create a feature branch: `git checkout -b feature/AmazingFeature`
-3. Commit your changes: `git commit -m 'Add AmazingFeature'`
-4. Push to branch: `git push origin feature/AmazingFeature`
-5. Open a Pull Request
+Licensed under the **MIT License**.
 
-Please ensure:
-- Code follows existing style conventions
-- All tests pass
-- Update documentation as needed
+---
 
-## 📝 License
+# 👨‍💻 Author
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
-## 👨‍💻 Author
-
-**Your Name**
-- GitHub: [@yourusername](https://github.com/yourusername)
-- Email: your.email@example.com
-
-## 🙏 Acknowledgments
-
-- [Spring Boot Documentation](https://spring.io/projects/spring-boot)
-- [Next.js Documentation](https://nextjs.org/docs)
-- [Tailwind CSS](https://tailwindcss.com)
-- [Zustand](https://github.com/pmndrs/zustand)
-- [React Hook Form](https://react-hook-form.com)
-
-## 📞 Support
-
-Need help? Here's how to get support:
-
-- 📧 Email: your.email@example.com
-- 🐛 Issues: [GitHub Issues](https://github.com/yourusername/repo/issues)
-- 💬 Discussions: [GitHub Discussions](https://github.com/yourusername/repo/discussions)
+Email: `vicky.nits2907@gmail.com`
 
 ---
 
 <div align="center">
 
-**⭐ Star this repo if you find it helpful!**
+⭐ If you like this project, consider giving it a star!
 
-Made with ❤️ using Java Spring Boot & Next.js
+Built with ❤️ using Spring Boot & Next.js
 
 </div>
-```
 
-## Key Improvements Made:
-
-1. **Better Structure** - Added table of contents flow with clear sections
-2. **Enhanced Descriptions** - More professional and concise feature descriptions
-3. **API Table** - Formatted endpoints as a table for better readability
-4. **Security Section** - Expanded with more details
-5. **Deployment** - Added practical deployment guides with examples
-6. **Troubleshooting** - More comprehensive solutions
-7. **Professional Tone** - Consistent, clear, and professional throughout
-8. **Better Formatting** - Improved code blocks and section organization
-9. **Removed Redundancy** - Eliminated duplicate information
-10. **Added Context** - Better explanations where needed
-
+---
